@@ -1,4 +1,4 @@
-# acronis_test
+# acr_test
 
 To run tests, you have to run virtual environment for this repository.
 
