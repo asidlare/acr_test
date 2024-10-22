@@ -25,6 +25,4 @@ $ pytest -sv
 
 tools  - directory with tasks source code
 
-tests - directory with tests
-
-tmp - directory prepared for csv files
+test - directory with tests
