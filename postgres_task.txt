@@ -1,0 +1,54 @@
+Question #1: Find number of devices that have more than 10 backups.
+(There is no enough data in the table to have a result but the query can be the following.)
+'''
+WITH devices AS (
+    SELECT
+        device_name,
+        count(*) as cnt
+    FROM Backups
+    GROUP BY 1
+)
+SELECT
+    count(*)
+FROM devices
+WHERE
+    cnt > 10
+'''
+
+Question #2: Find number of devices that have only full backups.
+(There is no device in a table with full backups only but the following query will work.)
+'''
+WITH devices AS (
+    SELECT
+        device_name,
+        ARRAY_AGG(DISTINCT backup_type) AS backup_types
+    FROM Backups
+    GROUP BY 1
+)
+SELECT
+    count(*)
+FROM devices
+WHERE
+    backup_types &> ARRAY['Full']
+    AND ARRAY_LENGTH(backup_type, 1) = 1
+'''
+
+Question #3: Find average size of last full backups among all devices that have full backups.
+(I added round to have better representation.)
+'''
+WITH devices AS (
+    SELECT DISTINCT
+        device_name,
+        LAST_VALUE(backup_type) OVER (
+            PARTITION BY device_name
+            ORDER BY backup_date
+            RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+        ) AS last_backup_size
+    FROM Backups
+    WHERE
+        backup_type = 'Full'
+)
+SELECT
+    ROUND(AVG(last_backup_size), 2)
+FROM devices
+'''
