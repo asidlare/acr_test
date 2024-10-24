@@ -1,3 +1,20 @@
-E. all happy frogs are green
+    ..........................................
+    . FROGS               . FROGS
+    . RED                 . GREEN
+    . SWIM                . HAPPY
+    .                     . SAD (it is possible to be happy and sad in the same time)
+    .                     . SIT ON THE SHORE (but it is not possible to swim and sit on the shore in the same time)
 
-is the only one correct statement because other statements are too generic and exclude each other.
+
+
+    A. all frogs are red - false (red + green)
+    B. all frogs swim in the water - false (only red)
+    C. all frogs are happy - false (only green)
+    D. all frogs are sad - false (cannot swim and sit on the shore in the same time)
+    E. all happy frogs are green - true
+
+    Frogs
+        If the frog is green, then it is happy.
+        If the frog is sad, then it sits on the shore.
+        All frogs are either green or red.
+        If the frog is red, then it swims in the water.
