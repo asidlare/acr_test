@@ -1,6 +1,5 @@
 import re
-from itertools import count
-
+from collections import Counter
 
 def delete_consecutive_recurring_characters(word: str) -> str:
     return re.sub(r'(.)\1+', r'\1', word)
@@ -12,11 +11,12 @@ def delete_recurring_characters(word: str) -> str:
 
 def delete_non_unique_characters(word: str) -> str:
     seen = set()
+    counts = Counter(word)
     output = ''
     for c in word:
         if c in seen:
             continue
-        if word.count(c) == 1:
+        if counts[c] == 1:
             output += c
         seen.add(c)
     return output

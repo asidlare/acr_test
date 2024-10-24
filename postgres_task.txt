@@ -39,7 +39,7 @@ Question #3: Find average size of last full backups among all devices that have 
 WITH devices AS (
     SELECT DISTINCT
         device_name,
-        LAST_VALUE(backup_type) OVER (
+        LAST_VALUE(backup_size) OVER (
             PARTITION BY device_name
             ORDER BY backup_date
             RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
